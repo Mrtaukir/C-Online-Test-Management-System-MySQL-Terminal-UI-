@@ -1,0 +1,48 @@
+CREATE DATABASE IF NOT EXISTS mockTests;
+USE mockTests;
+
+CREATE TABLE IF NOT EXISTS user (
+    id INT NOT NULL AUTO_INCREMENT,
+    fullName VARCHAR(200) NOT NULL,
+    city VARCHAR(200) NOT NULL,
+    mobileNo VARCHAR(100) NOT NULL UNIQUE,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(200) NOT NULL,
+    role VARCHAR(100) NOT NULL DEFAULT 'student',
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE IF NOT EXISTS mockDetails(
+	mockID INT NOT NULL AUTO_INCREMENT,
+    title VARCHAR(200) NOT NULL,
+    subject VARCHAR(200) NOT NULL,
+    duration INT NOT NULL,
+    testDate DATETIME DEFAULT CURRENT_TIMESTAMP,
+    level VARCHAR(200) NOT NULL,
+    PRIMARY KEY(mockID)
+);
+
+CREATE TABLE IF NOT EXISTS questionDetails(
+	questionId INT NOT NULL AUTO_INCREMENT,
+    mockId INT NOT NULL,
+    question TEXT NOT NULL,
+    option1 VARCHAR(300) NOT NULL,
+    option2 VARCHAR(300) NOT NULL,
+    option3 VARCHAR(300) NOT NULL,
+    option4 VARCHAR(300) NOT NULL,
+    correctAnswer VARCHAR(100) NOT NULL,
+    PRIMARY KEY(questionId)
+);
+ 
+ALTER TABLE questionDetails ADD COLUMN marks DOUBLE DEFAULT 1;
+
+CREATE TABLE IF NOT EXISTS userMockDetails(
+	id INT NOT NULL AUTO_INCREMENT,
+    mockId INT NOT NULL,
+    studentId INT NOT NULL,
+    totalMarks INT NOT NULL,
+    obtainMarks INT NOT NULL,
+    PRIMARY KEY(id)
+);
+
+SET SQL_SAFE_UPDATES = 0;
